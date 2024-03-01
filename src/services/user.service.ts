@@ -29,6 +29,16 @@ class UserService {
         return userObject;
     }
 
+    async findByLogin(email: string) {
+        const user = await Users.findOne({email}).catch((error) => {
+            console.log('Could not rebrieve user info', error)
+        })
+        if (!user) {
+            throw boom.badRequest('Could not create user')
+        }
+        return user;
+    }
+
     async findAll() {
         const users = await Users.find().catch((error) => {
             console.log('Error while connecting to the DB', error);
