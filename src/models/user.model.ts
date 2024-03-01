@@ -14,7 +14,7 @@ const Users = new Schema<User, UserModel>({
         unique: true,
         index: true,
         trim: true,
-        // match: [EMAIL_REGEX, 'Please enter a valid email']
+        match: [EMAIL_REGEX, 'Please enter a valid email']
     },
     password: {
         type: String,
@@ -24,7 +24,7 @@ const Users = new Schema<User, UserModel>({
         type: String,
         required: true,
         trim: true,
-        // match: [PHONE_NUMBER_REGEX, 'Please enter a valid phone number']
+        match: [PHONE_NUMBER_REGEX, 'Please enter a valid phone number']
     },
     createdAt: {
         type: Date,

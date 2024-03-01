@@ -23,7 +23,7 @@ router.post('/', async(req, res) => {
     //     res.status(201).json(newWatching);
 });
 
-router.get('/', async(req, res, next) => {
+router.get('/all', async(req, res, next) => {
     try {
         const watches = await service.findAll();
         res.status(200).json(watches);
@@ -46,9 +46,8 @@ router.get('/:id', async (req, res, next) => {
 });
 
 router.get('/', async (req, res, next) => {
-    console.log(req.query.name as string)
     try {
-        const watching = await service.findById(req.query.name as string)
+        const watching = await service.findByName(req.query.name as string)
         res.status(200).json(watching)
     } catch (error) {
         next(error)
