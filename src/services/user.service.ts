@@ -28,18 +28,7 @@ class UserService {
         delete userObject.password;
         return userObject;
     }
-
-    // async findByName(name: string) {
-    //     const user = await Users.find({ name }).catch((error) => {
-    //       console.log('Could not retrieve user info', error)
-    //     })
     
-    //     if (!user) {
-    //       throw boom.notFound('User not found')
-    //     }
-    //     return user
-    //   }
-
     async findByLogin(email: string) {
         const user = await Users.findOne({email}).catch((error) => {
             console.log('Could not rebrieve user info', error)
