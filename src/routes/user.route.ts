@@ -1,6 +1,7 @@
 import express from 'express';
 import { User } from '../types/User.type'
 import UserService from '../services/user.service';
+import passport from 'passport';
 import boom from '@hapi/boom'
 
 const router = express.Router();
@@ -31,7 +32,7 @@ router.post('/', async (req, res, next) => {
 //     }
 //   })
 
-router.get('/all', async(req, res, next) => {
+router.get('/all', passport.authenticate('local', { session: false}), async(req, res, next) => {
     try {
         const users = await service.findAll();
         res.status(200).json(users);
@@ -40,7 +41,7 @@ router.get('/all', async(req, res, next) => {
     }
 });
 
-router.get('/', async (req, res, next) => {
+router.get('/', passport.authenticate('local', { session: false}), async (req, res, next) => {
     try {
         const { email } = req.query
         const user = await service.findByEmail(email as string);
