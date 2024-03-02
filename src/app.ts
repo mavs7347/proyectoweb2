@@ -28,3 +28,6 @@ app.listen(port, () => {
 app.use(logErrors);
 app.use(boomErrorHandler);
 app.use(errorHandler);
+
+
+//token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWUxYzE5ZDlkYmY4N2YxNjQ1YTY5ODYiLCJpYXQiOjE3MDkzMjgyODV9.aLlllRq220qtydP19TpzDbzikNK7ibXX_Ysy7mCsldI

@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 import { User, UserModel } from '../types/User.type'
-import { EMAIL_REGEX, PHONE_NUMBER_REGEX } from "../utils/auth/strategies/constants";
+import { EMAIL_REGEX, PHONE_NUMBER_REGEX } from "../utils/constants";
 
 const Users = new Schema<User, UserModel>({
     name: {
