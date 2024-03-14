@@ -1,7 +1,7 @@
 import express from 'express';
-import { User } from '../types/User.type'
-import UserService from '../services/user.service';
-import passport from 'passport';
+import { User, UserModel } from '../types/User.type'
+import UserService from '../services/user.service'
+import passport from 'passport'
 import boom from '@hapi/boom'
 
 const router = express.Router();
@@ -10,11 +10,11 @@ const service = new UserService();
 router.post('/', async (req, res, next) => {
     try {
         const user: User = req.body
-        if (!user.email || !user.password || !user.phoneNumber) {
-            throw boom.badRequest('User, password and phoneNumber is required')
+        if (!user.email || !user.password) {
+            throw boom.badRequest('User and password is required')
         }
         const newUser = await service.create(user)
-        res.status(201).json({newUser})
+        res.status(201).json({user: newUser.toClient()})
     } catch(error) {
         next(error)
     }

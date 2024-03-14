@@ -1,12 +1,8 @@
 import type { Model } from 'mongoose';
 import type { Request } from 'express';
 
-export type User = {
-    id?: string
-    name: string
-    email: string
+export type User = ToClientUser & {
     password: string
-    phoneNumber: string
     createdAt?: Date
     lastModified?: Date
 }
@@ -15,4 +11,15 @@ export type UserRequestType = Request & {
     user: User
 }
 
-export type UserModel = Model<User>
+export type ToClientUser = {
+    id?: string
+    name: string
+    email: string
+    phoneNumber?: string
+}
+
+export type UserMethods = {
+    toClient: () => ToClientUser
+}
+
+export type UserModel = Model<User, {}, UserMethods>

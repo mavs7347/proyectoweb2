@@ -1,8 +1,8 @@
 import { Schema, model } from "mongoose";
-import { User, UserModel } from '../types/User.type'
+import { User, UserMethods, UserModel } from '../types/User.type'
 import { EMAIL_REGEX, PHONE_NUMBER_REGEX } from "../utils/constants";
 
-const Users = new Schema<User, UserModel>({
+const Users = new Schema<User, UserModel, UserMethods>({
     name: {
         type: String,
         required: true,
@@ -22,7 +22,7 @@ const Users = new Schema<User, UserModel>({
     },
     phoneNumber: {
         type: String,
-        required: true,
+        required: false,
         trim: true,
         match: [PHONE_NUMBER_REGEX, 'Please enter a valid phone number']
     },
@@ -35,5 +35,14 @@ const Users = new Schema<User, UserModel>({
         default: () => Date.now()
     }
 })
+
+Users.methods.toClient = function() {
+    return {
+        id: this._id as unknown as string,
+        name: this.name,
+        email: this.email,
+        phoneNumber: this.phoneNumber
+    }
+}
 
 export default model('User', Users)

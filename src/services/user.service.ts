@@ -4,6 +4,9 @@ import boom from '@hapi/boom'
 import bcrytp from 'bcrypt';
 
 class UserService {
+    // getToClientUser(user: Partial<User>): Partial<User> {
+    //     return {... user, password: undefined}
+    // }
     async create(user: User) {
         const hashedPassword = await bcrytp.hash(user.password, 10);
         const newUser = await Users.create({...user, password: hashedPassword}).catch((error) => {
@@ -12,9 +15,10 @@ class UserService {
         if (!newUser) {
             throw boom.badRequest('Could not create user')
         }
-        const newUserObject = newUser.toJSON();
-        delete newUserObject.password;
-        return newUserObject;
+        // const newUserObject = newUser.toJSON();
+        // delete newUserObject.password;
+        // return newUserObject;
+        return newUser
     }
 
     async findByEmail(email: string) {
@@ -24,9 +28,10 @@ class UserService {
         if (!user) {
             throw boom.badRequest('Could not create user')
         }
-        const userObject = user.toJSON();
-        delete userObject.password;
-        return userObject;
+        // const userObject = user.toJSON();
+        // delete userObject.password;
+        // return userObject;
+        return user
     }
     
     async findByLogin(email: string) {
