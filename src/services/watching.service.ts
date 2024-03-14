@@ -2,17 +2,18 @@ import { ObjectId } from 'mongoose';
 import Watches from '../models/watching.model'
 import { Watching, WatchingModel } from '../types/Watching.type';
 import boom from '@hapi/boom';
-
+import { USER_REFERENCE } from '../models/user.model';
 class WatchingService {
     async create(watching: Watching, userId: ObjectId) {
         const newWatching = await Watches.create({...watching, user: userId}).catch((error) => {
             console.log('Could not save watches', error);
         })
-        return newWatching;
+        const existingWatching = await this.findById((newWatching as any)._id);
+        return existingWatching.populate([{ path: 'user', strictPopulate: false}]);
     }
     
     async findAll() {
-        const watches = await Watches.find().catch((error) => {
+        const watches = await Watches.find().populate([{ path: 'user', strictPopulate: false}]).catch((error) => {
             console.log('Error while connecting to the DB', error);
         })
         
