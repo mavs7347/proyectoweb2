@@ -15,9 +15,6 @@ class UserService {
         if (!newUser) {
             throw boom.badRequest('Could not create user')
         }
-        // const newUserObject = newUser.toJSON();
-        // delete newUserObject.password;
-        // return newUserObject;
         return newUser
     }
 
@@ -28,9 +25,6 @@ class UserService {
         if (!user) {
             throw boom.badRequest('Could not create user')
         }
-        // const userObject = user.toJSON();
-        // delete userObject.password;
-        // return userObject;
         return user
     }
     

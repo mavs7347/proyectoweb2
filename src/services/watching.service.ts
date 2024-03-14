@@ -1,10 +1,11 @@
+import { ObjectId } from 'mongoose';
 import Watches from '../models/watching.model'
 import { Watching, WatchingModel } from '../types/Watching.type';
 import boom from '@hapi/boom';
 
 class WatchingService {
-    async create(watching: Watching) {
-        const newWatching = await Watches.create(watching).catch((error) => {
+    async create(watching: Watching, userId: ObjectId) {
+        const newWatching = await Watches.create({...watching, user: userId}).catch((error) => {
             console.log('Could not save watches', error);
         })
         return newWatching;
