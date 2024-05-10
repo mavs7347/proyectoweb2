@@ -32,7 +32,7 @@ router.post('/', async (req, res, next) => {
 //     }
 //   })
 
-router.get('/all', passport.authenticate('local', { session: false}), async(req, res, next) => {
+router.get('/all', passport.authenticate('jwt', { session: false}), async(req, res, next) => {
     try {
         const users = await service.findAll();
         res.status(200).json(users);

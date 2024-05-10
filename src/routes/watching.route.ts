@@ -17,7 +17,7 @@ router.post('/', passport.authenticate('jwt', { session: false}), async(req: Jwt
     res.status(201).json(newWatching);
 });
 
-router.get('/all', passport.authenticate('jwt', { session: false}), async(req: JwtRequestType, res, next) => {
+router.get('/all', async(req: JwtRequestType, res, next) => {
     try {
         const { user } = req;
         console.log(user);
