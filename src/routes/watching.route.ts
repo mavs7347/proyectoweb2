@@ -8,7 +8,6 @@ import { ObjectId } from 'mongoose';
 const router = express.Router();
 const service = new WatchingService();
 
-
 router.post('/', passport.authenticate('jwt', { session: false}), async(req: JwtRequestType, res) => {
     const { user: {sub} } = req
     const watching: Watching = req.body;

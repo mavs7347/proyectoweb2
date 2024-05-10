@@ -13,7 +13,7 @@ class UserService {
             console.log('Could not save user', error)
         })
         if (!newUser) {
-            throw boom.badRequest('Could not create user')
+            throw boom.badImplementation('No se pudo crear el usuario')
         }
         return newUser
     }
@@ -23,20 +23,20 @@ class UserService {
             console.log('Could not rebrieve user info', error)
         })
         if (!user) {
-            throw boom.badRequest('Could not create user')
+            throw boom.notFound('Cuenta no encontrada')
         }
         return user
     }
     
-    async findByLogin(email: string) {
-        const user = await Users.findOne({email}).catch((error) => {
-            console.log('Could not rebrieve user info', error)
-        })
-        if (!user) {
-            throw boom.badRequest('Could not create user')
-        }
-        return user;
-    }
+    // async findByLogin(email: string) {
+    //     const user = await Users.findOne({email}).catch((error) => {
+    //         console.log('Could not rebrieve user info', error)
+    //     })
+    //     if (!user) {
+    //         throw boom.badRequest('Could not create user')
+    //     }
+    //     return user;
+    // }
 
     async findAll() {
         const users = await Users.find().catch((error) => {

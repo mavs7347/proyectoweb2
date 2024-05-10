@@ -11,7 +11,7 @@ router.post('/', async (req, res, next) => {
     try {
         const user: User = req.body
         if (!user.email || !user.password) {
-            throw boom.badRequest('User and password is required')
+            throw boom.badRequest('Email and password is required')
         }
         const newUser = await service.create(user)
         res.status(201).json({user: newUser.toClient()})
@@ -41,11 +41,11 @@ router.get('/all', passport.authenticate('local', { session: false}), async(req,
     }
 });
 
-router.get('/', passport.authenticate('local', { session: false}), async (req, res, next) => {
+router.post('/', passport.authenticate('local', { session: false}), async (req, res, next) => {
     try {
         const { email } = req.query
         const user = await service.findByEmail(email as string);
-
+        
         res.status(200).json({user})
     } catch(error) {
         next(error)
